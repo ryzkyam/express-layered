@@ -9,11 +9,6 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.send("selamat datang");
-  prisma.product;
-});
-
 const productController = require("./product/product.controller");
 
 app.use("/products", productController);
