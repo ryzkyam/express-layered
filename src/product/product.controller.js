@@ -6,7 +6,7 @@ const {
   getAllProducts,
   getProductById,
   createProduct,
-  deleteProduct
+  deleteProduct,
 } = require("./product.service");
 
 // get product all
@@ -16,10 +16,13 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const productId = parseInt(req.params.id);
-  const product = await getProductById(productId);
-
-  res.send(product);
+  try {
+    const productId = parseInt(req.params.id);
+    const product = await getProductById(productId);
+    res.send(product);
+  } catch (error) {
+    res.status(400).send(error.massage);
+  }
 });
 
 // create product
@@ -37,8 +40,8 @@ router.delete("/:id", async (req, res) => {
   const productId = parseInt(req.params.id);
   const product = await deleteProduct(productId);
   res.send({
-     data: product,
-     massage: "deleted product succes",
+    data: product,
+    massage: "deleted product succes",
   });
 });
 

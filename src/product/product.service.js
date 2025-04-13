@@ -11,7 +11,6 @@ const getProductById = async (id) => {
   if (typeof id !== "number") {
     throw new Error("ID is not number");
   }
-
   const product = await prisma.product.findUnique({
     where: {
       id,
