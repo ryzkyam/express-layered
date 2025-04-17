@@ -44,7 +44,6 @@ const getProductById = async (id) => {
       },
     },
   });
-git 
   if (!product) {
     throw new Error("Product not found!");
   }
