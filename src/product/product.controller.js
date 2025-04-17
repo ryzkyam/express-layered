@@ -1,4 +1,4 @@
-// untuk menkontrol alur bussines dari applikasi 
+// untuk menkontrol alur bussines dari applikasi
 const express = require("express");
 const router = express.Router();
 const {
@@ -7,6 +7,7 @@ const {
   createProduct,
   deleteProduct,
 } = require("./product.service");
+const { product } = require("../db");
 
 // get product all
 router.get("/", async (req, res) => {
@@ -18,9 +19,14 @@ router.get("/:id", async (req, res) => {
   try {
     const productId = parseInt(req.params.id);
     const product = await getProductById(productId);
-    res.send(product);
+   
+    res.status(201).send({
+      data: product,
+    });
   } catch (error) {
-    res.status(400).send(error.massage);}
+    res.status(400).send(error.massage);
+  }
+  return product
 });
 
 // create product
