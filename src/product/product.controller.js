@@ -1,7 +1,6 @@
+// untuk menkontrol alur bussines dari applikasi 
 const express = require("express");
 const router = express.Router();
-
-const prisma = require("../db");
 const {
   getAllProducts,
   getProductById,
@@ -21,8 +20,7 @@ router.get("/:id", async (req, res) => {
     const product = await getProductById(productId);
     res.send(product);
   } catch (error) {
-    res.status(400).send(error.massage);
-  }
+    res.status(400).send(error.massage);}
 });
 
 // create product

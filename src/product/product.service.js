@@ -2,8 +2,22 @@ const prisma = require("../db");
 const { product } = require("../db");
 
 const getAllProducts = async () => {
-  const products = await prisma.product.findMany();
-
+  const products = await prisma.product.findMany({
+    include: {
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      tags: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
   return products;
 };
 
@@ -15,8 +29,22 @@ const getProductById = async (id) => {
     where: {
       id,
     },
+    include: {
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      tags: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
-
+git 
   if (!product) {
     throw new Error("Product not found!");
   }
